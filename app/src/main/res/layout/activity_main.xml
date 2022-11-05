@@ -5,7 +5,64 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/internet"
     tools:context=".MainActivity">
+    <RelativeLayout
+        android:id="@+id/noInternetLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/no_internet_image"
+            android:layout_width="100dp"
+            android:layout_height="200dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginVertical="150dp"
+            android:layout_marginTop="100dp"
+            android:src="@drawable/img" />
+
+        <TextView
+            android:id="@+id/no_internet_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/no_internet_image"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="71dp"
+            android:layout_marginEnd="71dp"
+
+            android:text="Не удалось загрузить информацию"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/try_again_button"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="40dp"
+            android:layout_below="@id/no_internet_heading"
+            android:layout_centerHorizontal="true"
+            android:layout_marginVertical="50dp"
+            android:backgroundTint="#9B51E0"
+            android:paddingHorizontal="32dp"
+            android:text="Try Again"
+            android:textAllCaps="false"
+            app:cornerRadius="16dp" />
+
+
+    </RelativeLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBarLarge"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:visibility="invisible"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/purple_200"
+        android:layout_gravity="center" />
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -17,7 +74,8 @@
             android:layout_height="wrap_content"
             app:contentScrim="@color/white"
             app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
-            app:title="Пользыватели"
+            app:title="Пользователи"
+            app:expandedTitleTextAppearance="@style/Collapsed"
             app:collapsedTitleGravity="center"
             app:expandedTitleTextColor="@color/black">
 
@@ -25,7 +83,6 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:scaleType="centerCrop"
                 android:background="@color/white"
                 app:layout_collapseMode="parallax" />
 
@@ -33,11 +90,11 @@
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                app:layout_collapseMode="pin"
                 app:expandedTitleGravity="bottom|center_horizontal"
+                app:layout_collapseMode="pin"
                 app:titleTextColor="@color/black"
 
-                 />
+                />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -52,15 +109,15 @@
         <!--In textview we will be adding the text that i have
             added earlier in strings.xml file.This is simply the
             the content to be scrolled -->
-        <TextView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:lineSpacingExtra="8sp"
-            android:padding="16dp"
-            android:text="@string/content"
-            android:textSize="20sp" />
+            android:layout_height="match_parent"
+            tools:listitem="@layout/showitem"/>
     </androidx.core.widget.NestedScrollView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
 
 
