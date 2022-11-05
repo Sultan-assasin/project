@@ -1,14 +1,12 @@
 package com.sultan.App
 
+import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities.NET_CAPABILITY_INTERNET
 import android.os.Bundle
+import android.util.Log
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
-import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sultan.App.data.ApiInterface
 import com.sultan.App.data.UserItem
@@ -22,11 +20,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 const val BASE_URL = "https://jsonplaceholder.typicode.com/"
 private lateinit var binding: ActivityMainBinding
 lateinit var linearManger: LinearLayoutManager
-lateinit var userAdapter : UserAdapter
+lateinit  var userAdapter : UserAdapter
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var internetLayout: CoordinatorLayout
-    private lateinit var noInternetLayout: RelativeLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,8 +33,7 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerView.layoutManager = linearManger
         binding.progressBarLarge.visibility = View.VISIBLE
 
-        internetLayout  = findViewById(R.id.internet)
-        noInternetLayout = findViewById(R.id.noInternetLayout)
+
 
 
 
@@ -85,11 +80,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun drawLayout() {
         if (isNetworkAvailable()) {
-            internetLayout.visibility = VISIBLE
-            noInternetLayout.visibility = GONE
+            Log.d("Internet" , "internet is have connection")
         } else {
-            noInternetLayout.visibility = VISIBLE
-            internetLayout.visibility = GONE
+            startActivity(Intent(this, SecondActivity::class.java))
         }
     }
 }
